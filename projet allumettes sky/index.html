@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f3eb">
+    <title>Le jeu des allumettes</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#home-view" data-view="home" aria-label="Le jeu des allumettes, nouvelle partie">
+          <span class="brand-mark" aria-hidden="true">🔥</span>
+          <span>Le jeu des allumettes</span>
+        </a>
+        <nav class="tabs" aria-label="Navigation principale">
+          <button class="tab is-active" type="button" data-view="home" aria-current="page">Nouvelle partie</button>
+          <button class="tab" type="button" data-view="history">Historique <span id="history-count" class="tab-count">0</span></button>
+        </nav>
+      </header>
+
+      <main>
+        <section id="home-view" class="view">
+          <div class="intro">
+            <p class="eyebrow">Un jeu de stratégie</p>
+            <h1>À vous de jouer!<br><span>Que le meilleur gagne.</span></h1>
+            <p class="intro-copy">À tour de rôle, prenez 1, 2 ou 3 allumettes. Celui qui prend la dernière perd la partie.</p>
+          </div>
+
+          <section id="setup-card" class="panel setup-card" aria-labelledby="setup-title">
+            <div class="panel-heading">
+              <span class="step-number">01</span>
+              <div>
+                <h2 id="setup-title">Préparez la partie</h2>
+                <p>Choisissez le niveau de l'IA.</p>
+              </div>
+            </div>
+            <fieldset class="difficulty-options">
+              <legend class="sr-only">Difficulté de l'ordinateur</legend>
+              <label class="difficulty-option">
+                <input type="radio" name="difficulty" value="easy">
+                <span class="difficulty-card">
+                  <span class="difficulty-icon" aria-hidden="true">☀</span>
+                  <span class="difficulty-name">Facile</span>
+                  <span class="difficulty-detail">L'ordinateur joue au hasard.</span>
+                </span>
+              </label>
+              <label class="difficulty-option">
+                <input type="radio" name="difficulty" value="medium" checked>
+                <span class="difficulty-card">
+                  <span class="difficulty-icon" aria-hidden="true">◈</span>
+                  <span class="difficulty-name">Moyen</span>
+                  <span class="difficulty-detail">Un peu de stratégie, un peu de hasard.</span>
+                </span>
+              </label>
+              <label class="difficulty-option">
+                <input type="radio" name="difficulty" value="hard">
+                <span class="difficulty-card">
+                  <span class="difficulty-icon" aria-hidden="true">✦</span>
+                  <span class="difficulty-name">Difficile</span>
+                  <span class="difficulty-detail">L'ordinateur cherche le meilleur coup.</span>
+                </span>
+              </label>
+            </fieldset>
+            <button id="start-button" class="primary-button" type="button">
+              Commencer une partie <span aria-hidden="true">→</span>
+            </button>
+            <p class="setup-note"><span aria-hidden="true">●</span> 21 allumettes · Vous commencez</p>
+          </section>
+
+          <section id="game-card" class="panel game-card" aria-labelledby="game-title" hidden>
+            <div class="game-topline">
+              <div>
+                <p class="eyebrow">La partie est lancée</p>
+                <h2 id="game-title">À vous de jouer</h2>
+              </div>
+              <span id="game-difficulty" class="difficulty-badge">Moyen</span>
+            </div>
+            <p id="turn-message" class="turn-message" aria-live="polite">Choisissez combien d'allumettes prendre.</p>
+            <div class="pile-area">
+              <div class="pile-label"><span>Allumettes restantes</span><strong id="remaining-count">21</strong></div>
+              <div id="match-pile" class="match-pile" role="img" aria-label="21 allumettes restantes"></div>
+            </div>
+            <div class="move-controls">
+              <p>Combien en prenez-vous ?</p>
+              <div class="move-buttons">
+                <button class="move-button" type="button" data-take="1"><span>−1</span><small>allumette</small></button>
+                <button class="move-button" type="button" data-take="2"><span>−2</span><small>allumettes</small></button>
+                <button class="move-button" type="button" data-take="3"><span>−3</span><small>allumettes</small></button>
+              </div>
+            </div>
+            <button id="new-game-button" class="text-button" type="button">Abandonner et recommencer</button>
+          </section>
+          <p id="storage-message" class="storage-message" role="status" hidden></p>
+        </section>
+
+        <section id="history-view" class="view history-view" hidden>
+          <div class="intro">
+            <p class="eyebrow">Vos dernières parties</p>
+            <h1>Chaque partie<br><span>et son historique.</span></h1>
+            <p class="intro-copy">Retrouvez ici vos résultats et le niveau choisi.</p>
+          </div>
+          <section class="panel history-panel" aria-labelledby="history-title">
+            <div class="panel-heading history-heading">
+              <div>
+                <h2 id="history-title">Historique</h2>
+                <p id="history-summary">Aucune partie jouée pour le moment.</p>
+              </div>
+              <button id="clear-history-button" class="text-button clear-button" type="button" hidden>Effacer l'historique</button>
+            </div>
+            <div id="history-list" class="history-list"></div>
+            <div id="empty-history" class="empty-history">
+              <span class="empty-icon" aria-hidden="true">☷</span>
+              <h3>La première partie n'attend que vous.</h3>
+              <p>Vos victoires et défaites apparaîtront ici.</p>
+              <button class="secondary-button" type="button" data-view="home">Lancer une partie</button>
+            </div>
+          </section>
+        </section>
+      </main>
+      <footer class="footer"><span>Un jeu tout simple.</span><span>À vous d'essayer.</span></footer>
+    </div>
+  </body>
+</html>
